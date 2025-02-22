@@ -9,8 +9,6 @@ const ticketRoutes = require('./routes/ticketRoutes')
 const eventRoutes = require('./routes/eventRoutes')
 const venueRoutes = require('./routes/venueRoutes')
 
-
-
 app.use(cookieParser())
 app.use(express.json());
 

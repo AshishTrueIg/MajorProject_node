@@ -12,9 +12,14 @@ const getAllTickets = async (req,res)=>{
 
 const getUserTickets = async (req,res)=>{
     try {
+        const userId = req.params.id;
+        console.log(userId);
+        if(!userId)
+            return res.status(400).json({error : "User Id is required"})
+
         const data = await Ticket.findAll({
             where:{
-                id:req.params.id
+                userId
             }
         });
         res.json(data)
@@ -22,6 +27,8 @@ const getUserTickets = async (req,res)=>{
         res.status(500).json({error : error.message})
     }
 }
+
+
 const cancelTicket = async (req,res)=>{
     try {
         const data = await Ticket.destroy({
