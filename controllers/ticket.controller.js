@@ -3,10 +3,28 @@ const Ticket = db.Ticket;
 const User = db.User;
 const Event = db.Event;
 
+
+let currentPage =1;
+
 const getAllTickets = async (req,res)=>{
     try {
-        const data = await Ticket.findAll();
-        res.json(data)
+        const size =3;
+        const totalTickets = await Ticket.count();
+        const totalPage = Math.ceil(totalTickets/size);
+        const offset = (currentPage-1)*size;
+
+        const data = await Ticket.findAll({
+            limit:size,
+            offset:offset
+        });
+
+        currentPage = currentPage<totalPage ? currentPage +1 :1;
+
+        res.status(200).json({
+            currentPage,
+            totalPage,
+            data:data
+        })
     } catch (error) {
         res.status(500).json({error : error.message})
     }

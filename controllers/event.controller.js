@@ -3,10 +3,23 @@ const Event = db.Event;
 const Ticket= db.Ticket;
 const Venue = db.Venue;
 
+let currentPage =1;
 const getAllEvents = async (req, res) => {
   try {
-    const events = await Event.findAll();
-    res.json(events);
+    const size =3;
+    const totalEvents= await Event.count();
+    const totalPage = Math.ceil(totalEvents/size);
+    const offset = (currentPage-1)*size;
+
+    const events = await Event.findAll({
+      limit:size,
+      offset:offset
+    });
+    res.json({
+      currentPage,
+      totalPage,
+      data:events
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

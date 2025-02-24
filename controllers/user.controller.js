@@ -2,15 +2,33 @@ const db = require('../models/index')
 const User = db.User;
 const Ticket = db.Ticket;
 
-const getAllUsers = async (req,res)=>{
+let currentPage = 1;
+const getAllUsers = async (req, res) => {
     try {
-        const data = await User.findAll();
-        res.status(200).json({data:data});
+        
+        const size = 2;
+        const totalUsers = await User.count();
+        const totalPages = Math.ceil(totalUsers / size);
+        const offset = (currentPage - 1) * size;
+
+        const data = await User.findAll({
+            limit: size,
+            offset: offset
+        });
+
+        currentPage = currentPage < totalPages ? currentPage + 1 : 1;
+
+        res.status(200).json({
+            currentPage,
+            totalPages,
+            data
+        });
 
     } catch (error) {
-        res.status(500).json({error : error.message});
+        res.status(500).json({ error: error.message });
     }
-}
+};
+
 
 const getUserById = async (req,res)=>{
     try {

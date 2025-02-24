@@ -18,17 +18,17 @@ module.exports = {
       date: {
         type: Sequelize.DATE
       },
-      venueId: {
+      venue_id: {
         type: Sequelize.INTEGER
       },
-      organizerId: {
+      organizer_id: {
         type: Sequelize.INTEGER
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }

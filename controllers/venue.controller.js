@@ -2,10 +2,23 @@ const db = require('../models/index')
 const Venue = db.Venue;
 const Event = db.Event;
 
+let currentPage = 1;
 const getAllVenues = async (req, res) => {
   try {
-    const venues = await Venue.findAll();
-    res.json(venues);
+    const size = 3;
+    const totalVenues = await Venue.count();
+    const totalPage = Math.ceil(totalVenues/size);
+    const offset = (currentPage-1)*size;
+    
+    const venues = await Venue.findAll({
+      limit:size,
+      offset:offset
+    });
+    res.json({
+      currentPage,
+      totalPage,
+      data:venues
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

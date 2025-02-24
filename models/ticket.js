@@ -14,13 +14,21 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Ticket.init({
-    eventId: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER,
+    eventId: {
+      type:DataTypes.INTEGER,
+      field:'event_id'
+    },
+    userId: {
+      type:DataTypes.INTEGER,
+      field:'user_id'
+    },
     type: DataTypes.STRING,
     price: DataTypes.DECIMAL
   }, {
     sequelize,
     modelName: 'Ticket',
+    tableName:'Tickets',
+    underscored:true
   });
   return Ticket;
 };
