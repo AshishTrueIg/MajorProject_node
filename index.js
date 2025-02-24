@@ -8,9 +8,12 @@ const userRoutes = require('./routes/userRoutes')
 const ticketRoutes = require('./routes/ticketRoutes')
 const eventRoutes = require('./routes/eventRoutes')
 const venueRoutes = require('./routes/venueRoutes')
+const startEventExpiryCron = require('./utils/cronJobs')
 
 app.use(cookieParser())
 app.use(express.json());
+
+startEventExpiryCron();
 
 app.use('/users',userRoutes)
 app.use('/tickets',ticketRoutes)
