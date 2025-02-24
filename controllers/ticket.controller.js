@@ -1,9 +1,11 @@
 const db = require('../models/index')
 const Ticket = db.Ticket;
+const User = db.User;
+const Event = db.Event;
 
 const getAllTickets = async (req,res)=>{
     try {
-        const data = await Ticket.findAll({});
+        const data = await Ticket.findAll();
         res.json(data)
     } catch (error) {
         res.status(500).json({error : error.message})
@@ -45,8 +47,18 @@ const cancelTicket = async (req,res)=>{
     }
 }
 
+const onetomany = async (req,res)=>{
+    try {
+        const data = await Ticket.findAll({include : [User,Event]});
+        res.json(data)
+    } catch (error) {
+        res.status(500).json({error : error.message})
+    }
+}
+
 module.exports = {
     getAllTickets,
     getUserTickets,
-    cancelTicket
+    cancelTicket,
+    onetomany
 }

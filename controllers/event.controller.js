@@ -1,6 +1,7 @@
 const db = require('../models/index')
 const Event = db.Event;
 const Ticket= db.Ticket;
+const Venue = db.Venue;
 
 const getAllEvents = async (req, res) => {
   try {
@@ -59,11 +60,23 @@ const bookTicket = async (req, res) => {
   }
 };
 
+const oneToMany = async (req,res)=>{
+  try {
+    const events = await Event.findAll({
+      include: [Venue,Ticket]
+    });
+    res.json(events);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
 module.exports = {
     getAllEvents,
     createEvent,
     getEventById,
     updateEvent,
     deleteEvent,
-    bookTicket
+    bookTicket,
+    oneToMany
 }
