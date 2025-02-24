@@ -7,10 +7,10 @@ module.exports = {
       title: "Team Lunch",
       description: "Meeting with the new members of the team",
       date: new Date(),
-      venueId: 85,
-      organizerId: 66,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      status:"Ongoing",
+      venue_id: 85,
+      created_at: new Date(),
+      updated_at: new Date(),
       }
     ]);
   },

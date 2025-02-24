@@ -5,10 +5,10 @@ module.exports = {
             title: { type: "string", minLength: 3 },
             description: { type: "string", maxLength: 500 },
             date: { type: "string", format: "date-time" },
+            status:{type:"string"},
             venueId: { type: "integer" },
-            organizerId: { type: "integer" },
         },
-        required: ["title", "venueId","organizerId"],
+        required: ["title", "venueId"],
         additionalProperties: false
     }
 };

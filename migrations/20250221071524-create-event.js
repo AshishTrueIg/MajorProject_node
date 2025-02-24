@@ -18,10 +18,10 @@ module.exports = {
       date: {
         type: Sequelize.DATE
       },
-      venue_id: {
-        type: Sequelize.INTEGER
+      status: {
+        type: Sequelize.STRING
       },
-      organizer_id: {
+      venue_id: {
         type: Sequelize.INTEGER
       },
       created_at: {

@@ -15,13 +15,10 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     description: DataTypes.TEXT,
     date: DataTypes.DATE,
+    status:DataTypes.STRING,
     venueId: {
       type:DataTypes.INTEGER,
       field:'venue_id'
-    },
-    organizerId: {
-      type:DataTypes.INTEGER,
-      field:'organizer_id'
     }
   }, {
     sequelize,
