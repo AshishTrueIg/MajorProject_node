@@ -8,7 +8,7 @@ module.exports = {
       description: "Meeting with the new members of the team",
       date: new Date(),
       status:"Ongoing",
-      venue_id: 85,
+      venue_id: 1,
       created_at: new Date(),
       updated_at: new Date(),
       }

@@ -1,6 +1,6 @@
 // cronJobs.js
 const cron = require('node-cron');
-const { Event } = require('../models/event');
+const { Event } = require('../db/models/event');
 const { Op } = require('sequelize');
 
 const startEventExpiryCron = () => {

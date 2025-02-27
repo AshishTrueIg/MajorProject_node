@@ -6,7 +6,7 @@ const Sequelize = require('sequelize');
 const process = require('process');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.js')[env];
+const config = require(__dirname + '/../../config/config.js')[env];
 const db = {};
 
 let sequelize;
@@ -49,20 +49,20 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.User = require('./user')(sequelize,Sequelize.DataTypes)
-db.Event = require('./event')(sequelize,Sequelize.DataTypes)
-db.Venue = require('./venue')(sequelize,Sequelize.DataTypes)
-db.Ticket = require('./ticket')(sequelize,Sequelize.DataTypes)
+// db.User = require('./user')(sequelize,Sequelize.DataTypes)
+// db.Event = require('./event')(sequelize,Sequelize.DataTypes)
+// db.Venue = require('./venue')(sequelize,Sequelize.DataTypes)
+// db.Ticket = require('./ticket')(sequelize,Sequelize.DataTypes)
 
 
-db.User.hasMany(db.Ticket , {foreignKey:'userId'});
-db.Ticket.belongsTo(db.User, {foreignKey:'userId'})
+// db.User.hasMany(db.Ticket , {foreignKey:'userId'});
+// db.Ticket.belongsTo(db.User, {foreignKey:'userId'})
 
-db.Event.hasMany(db.Ticket, {foreignKey:'eventId'});
-db.Ticket.belongsTo(db.Event, {foreignKey:'eventId'})
+// db.Event.hasMany(db.Ticket, {foreignKey:'eventId'});
+// db.Ticket.belongsTo(db.Event, {foreignKey:'eventId'})
 
 
-db.Event.belongsTo(db.Venue, {foreignKey:'venueId'});
-db.Venue.hasMany(db.Event ,{foreignKey:'venueId'})
+// db.Event.belongsTo(db.Venue, {foreignKey:'venueId'});
+// db.Venue.hasMany(db.Event ,{foreignKey:'venueId'})
 
 module.exports = db;

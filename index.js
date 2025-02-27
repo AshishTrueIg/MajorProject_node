@@ -3,7 +3,7 @@ const cookieParser = require('cookie-parser');
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT ;
-require('./models/index')
+require('./db/models/index')
 const userRoutes = require('./routes/userRoutes')
 const ticketRoutes = require('./routes/ticketRoutes')
 const eventRoutes = require('./routes/eventRoutes')

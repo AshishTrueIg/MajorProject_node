@@ -4,12 +4,12 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.bulkInsert('Tickets', [{
-      eventId: 23,
-      userId: 5,
+      event_id: 1,
+      user_id: 2,
       type:"VIP",
       price:999,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      created_at: new Date(),
+      updated_at: new Date(),
       }
     ]);
   },

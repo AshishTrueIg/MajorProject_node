@@ -1,0 +1,37 @@
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_container
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Ayush1ashish
+      POSTGRES_DB: EventManagement
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  backend:
+    build: .
+    container_name: express_backend
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      PORT: 8000
+      DB_USERNAME: postgres
+      DB_PASSWORD: Ayush1ashish
+      DB_NAME: EventManagement
+      DB_HOST: postgres # Use the service name instead of localhost
+      DB_DIALECT: postgres
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: ["npm", "start"] # Modify if needed
+
+volumes:
+  pg_data:

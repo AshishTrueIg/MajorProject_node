@@ -1,6 +1,7 @@
-const db = require('../models/index')
+const db = require('../db/models/index')
 const Venue = db.Venue;
 const Event = db.Event;
+const sequelize = db.sequelize;
 
 let currentPage = 1;
 const getAllVenues = async (req, res) => {
@@ -44,21 +45,33 @@ const getVenueById = async (req, res) => {
 };
 
 const updateVenue = async (req, res) => {
+  const transaction = await sequelize.transaction();
   try {
-    const [updated] = await Venue.update(req.body, { where: { id: req.params.id } });
+    const [updated] = await Venue.update(req.body, { where: { id: req.params.id } },
+      {transaction}
+    );
     if (!updated) return res.status(404).json({ error: 'Venue not found' });
+
+    await transaction.commit();
     res.json({ message: 'Venue updated successfully' });
   } catch (error) {
+    await transaction.rollback();
     res.status(500).json({ error: error.message });
   }
 };
 
 const deleteVenue = async (req, res) => {
+  const transaction = await sequelize.transaction();
   try {
-    const deleted = await Venue.destroy({ where: { id: req.params.id } });
+    const deleted = await Venue.destroy({ where: { id: req.params.id } },
+      {transaction}
+    );
     if (!deleted) return res.status(404).json({ error: 'Venue not found' });
+
+    await transaction.commit();
     res.json({ message: 'Venue deleted successfully' });
   } catch (error) {
+    await transaction.rollback();
     res.status(500).json({ error: error.message });
   }
 };

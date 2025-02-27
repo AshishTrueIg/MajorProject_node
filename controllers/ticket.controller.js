@@ -1,8 +1,8 @@
-const db = require('../models/index')
+const db = require('../db/models/index')
 const Ticket = db.Ticket;
 const User = db.User;
 const Event = db.Event;
-
+const sequelize = db.sequelize;
 
 let currentPage =1;
 
@@ -50,17 +50,21 @@ const getUserTickets = async (req,res)=>{
 
 
 const cancelTicket = async (req,res)=>{
+    const transaction = await sequelize.transaction();
     try {
         const data = await Ticket.destroy({
             where:{
                 id:req.params.id
             }
-        });
+        },
+        {transaction}
+    );
 
         if(!data) return res.json(404).json({error:"Ticket not found"})
-
+        await transaction.commit();
         res.json({message:"Ticket canceled Successfully"})
     } catch (error) {
+        await transaction.rollback();
         res.status(500).json({error : error.message})
     }
 }

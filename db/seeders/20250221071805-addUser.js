@@ -7,8 +7,8 @@ module.exports = {
       name: 'Mohit Kumar',
       email:"mohitKumar@gmail.com",
       role:"Organizer",
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      created_at: new Date(),
+      updated_at: new Date(),
       }
     ]);
     

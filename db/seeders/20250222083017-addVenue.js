@@ -7,8 +7,8 @@ module.exports = {
       name: 'Marriage',
       location:"Marriage garden",
       capacity:175,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      created_at: new Date(),
+      updated_at: new Date(),
       }
     ]);
   },
