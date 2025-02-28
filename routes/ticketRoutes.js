@@ -1,5 +1,5 @@
-const express = require('express');
-const ticketController = require('../controllers/ticket.controller')
+import express from 'express';
+import ticketController from '../controllers/ticket.controller.js'
 
 const router = express.Router();
 
@@ -11,4 +11,4 @@ router.delete('/:id',ticketController.cancelTicket);
 
 router.get('/oneToMany',ticketController.onetomany)
 
-module.exports = router;
+export default router;

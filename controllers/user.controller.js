@@ -1,4 +1,4 @@
-const db = require('../db/models/index')
+import db from '../db/models/index.js'
 const User = db.User;
 const Ticket = db.Ticket;
 const sequelize = db.sequelize;
@@ -125,7 +125,7 @@ const OneToMany = async (req,res)=>{
 }
 
 
-module.exports = {
+export default {
     getAllUsers,
     getUserById,
     createUser,

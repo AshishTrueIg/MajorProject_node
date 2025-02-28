@@ -1,4 +1,4 @@
-module.exports = {
+export default{
     createTicketSchema: {
         type: "object",
         properties: {

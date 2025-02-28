@@ -1,4 +1,4 @@
-module.exports = {
+export default  {
     createUserSchema: {
         type: "object",
         properties: {

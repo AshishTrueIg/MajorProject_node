@@ -1,7 +1,7 @@
-const express = require('express');
-const venueController = require('../controllers/venue.controller')
-const validate = require('../utils/ajvValidator')
-const createVenueSchema = require('../validators/venueValidator')
+import express from 'express';
+import venueController from '../controllers/venue.controller.js';
+import validate from '../utils/ajvValidator.js';
+import createVenueSchema from '../validators/venueValidator.js'
 
 const router = express.Router();
 
@@ -17,4 +17,4 @@ router.put('/:id',validate(createVenueSchema),venueController.updateVenue);
 
 router.delete('/:id',venueController.deleteVenue);
 
-module.exports = router;
+export default router;

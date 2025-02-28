@@ -9,4 +9,4 @@ const createUserSchema = {
         additionalProperties: false
 }
 
-module.exports = createUserSchema;
+export default createUserSchema;

@@ -1,4 +1,4 @@
-const db = require('../db/models/index')
+import db from '../db/models/index.js'
 const Venue = db.Venue;
 const Event = db.Event;
 const sequelize = db.sequelize;
@@ -85,7 +85,7 @@ const oneToMany = async (req,res)=>{
   }
 }
 
-module.exports = {
+export default {
     getAllVenues,
     createVenue,
     getVenueById,

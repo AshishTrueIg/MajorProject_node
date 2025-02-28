@@ -1,7 +1,7 @@
-// cronJobs.js
-const cron = require('node-cron');
-const { Event } = require('../db/models/event');
-const { Op } = require('sequelize');
+
+import cron from 'node-cron';
+import Event from '../db/models/event.cjs'
+import { Op } from 'sequelize';
 
 const startEventExpiryCron = () => {
   // This cron runs every day at midnight
@@ -28,4 +28,4 @@ const startEventExpiryCron = () => {
   });
 };
 
-module.exports = startEventExpiryCron;
+export default startEventExpiryCron;

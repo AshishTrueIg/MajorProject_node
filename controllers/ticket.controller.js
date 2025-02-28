@@ -1,4 +1,4 @@
-const db = require('../db/models/index')
+import db from '../db/models/index.js'
 const Ticket = db.Ticket;
 const User = db.User;
 const Event = db.Event;
@@ -78,7 +78,7 @@ const onetomany = async (req,res)=>{
     }
 }
 
-module.exports = {
+export default {
     getAllTickets,
     getUserTickets,
     cancelTicket,

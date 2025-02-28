@@ -1,6 +1,4 @@
 {
   "presets": ["@babel/preset-env"],
-  "plugins": [["@babel/plugin-transform-runtime", { "helpers": false }]],
-  "sourceMaps": true,
-  "sourceType": "unambiguous"
+  "ignore": ["node_modules", "dist"]
 }

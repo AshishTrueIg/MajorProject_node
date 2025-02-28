@@ -1,15 +1,16 @@
-require('dotenv').config();
-const cookieParser = require('cookie-parser');
-const express = require('express');
+import 'dotenv/config'
+import cookieParser from 'cookie-parser';
+import express from 'express'
+import db from'./db/models/index.js';
+import userRoutes from './routes/userRoutes.js'
+import ticketRoutes from './routes/ticketRoutes.js'
+import venueRoutes from './routes/venueRoutes.js'
+import eventRoutes from './routes/eventRoutes.js'
+import startEventExpiryCron from './utils/cronJobs.js'
+const sequelize =db.sequelize
+
 const app = express();
 const PORT = process.env.PORT ;
-require('./db/models/index')
-const userRoutes = require('./routes/userRoutes')
-const ticketRoutes = require('./routes/ticketRoutes')
-const eventRoutes = require('./routes/eventRoutes')
-const venueRoutes = require('./routes/venueRoutes')
-const startEventExpiryCron = require('./utils/cronJobs')
-
 app.use(cookieParser())
 app.use(express.json());
 
@@ -26,6 +27,14 @@ app.get('/',(req,res)=>{
 })
 
 
-app.listen(PORT,()=>{
-    console.log(`Server is running on PORT : ${PORT}`)
-})
+sequelize.authenticate()
+  .then(() => {
+    console.log('Database connected successfully');
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error(`Database connection failed: ${err.message}`);
+    process.exit(1);
+  });

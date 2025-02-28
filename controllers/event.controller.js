@@ -1,4 +1,4 @@
-const db = require('../db/models/index')
+import db from '../db/models/index.js'
 const Event = db.Event;
 const Ticket= db.Ticket;
 const Venue = db.Venue;
@@ -117,7 +117,7 @@ const oneToMany = async (req,res)=>{
   }
 }
 
-module.exports = {
+export default {
     getAllEvents,
     createEvent,
     getEventById,

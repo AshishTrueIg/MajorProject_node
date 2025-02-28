@@ -1,5 +1,8 @@
-const Ajv = require('ajv');
-const addFormats = require('ajv-formats')
+// const Ajv = require('ajv');
+// const addFormats = require('ajv-formats')
+
+import Ajv from 'ajv'
+import addFormats from 'ajv-formats'
 const ajv = new Ajv({ allErrors: true, strict: false });
 
 addFormats(ajv);
@@ -23,4 +26,4 @@ const validateSchema = (schema)=>{
     }
 }
 
-module.exports = validateSchema;
+export default validateSchema;

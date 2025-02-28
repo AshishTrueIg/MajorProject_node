@@ -1,7 +1,7 @@
-const express = require('express');
-const userController = require('../controllers/user.controller')
-const validate = require('../utils/ajvValidator')
-const createUserSchema = require('../validators/userValidator')
+import express from 'express';
+import userController from '../controllers/user.controller.js'
+import validate from '../utils/ajvValidator.js'
+import createUserSchema from '../validators/userValidator.js';
 
 const router = express.Router();
 
@@ -19,4 +19,4 @@ router.delete('/:id',userController.deleteUser);
 
 
 
-module.exports = router;
+export default router;

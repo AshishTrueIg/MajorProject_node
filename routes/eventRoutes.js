@@ -1,8 +1,8 @@
-const express = require('express');
-const eventController = require('../controllers/event.controller')
-const validate = require('../utils/ajvValidator')
-const createEventSchema = require('../validators/eventValidator')
-const {createTicketSchema} = require('../validators/ticketValidator');
+import express from 'express';
+import eventController from '../controllers/event.controller.js'
+import validate from '../utils/ajvValidator.js'
+import createEventSchema from '../validators/eventValidator.js';
+import createTicketSchema from '../validators/ticketValidator.js'
 
 const router = express.Router();
 
@@ -21,4 +21,4 @@ router.delete('/:id',eventController.deleteEvent);
 router.post('/:id/tickets',validate(createTicketSchema),eventController.bookTicket);
 
 
-module.exports = router;
+export default router;

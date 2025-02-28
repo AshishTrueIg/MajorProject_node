@@ -1,44 +1,43 @@
-'use strict';
+import dotenv from 'dotenv';
+import { readdirSync } from 'fs';
+import { fileURLToPath, pathToFileURL } from 'url';
+import path, { join, dirname } from 'path';
+import { Sequelize } from 'sequelize';
 
-const fs = require('fs');
-const path = require('path');
-const Sequelize = require('sequelize');
-const process = require('process');
+dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../../config/config.js')[env];
+
+const dbConfig = {
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  dialect: process.env.DB_DIALECT || 'postgres'
+};
+
 const db = {};
 
-let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
+const sequelize = new Sequelize(
+  dbConfig.database,
+  dbConfig.username,
+  dbConfig.password,
+  dbConfig
+);
+
+const modelFiles = readdirSync(__dirname)
+  .filter(file => file.indexOf('.') !== 0 && file !== basename && (file.endsWith('.js') || file.endsWith('.cjs')));
+
+for (const file of modelFiles) {
+  const modelPath = pathToFileURL(join(__dirname, file)).href;
+  const { default: modelInit } = await import(modelPath);
+  const model = modelInit(sequelize, Sequelize.DataTypes);
+  db[model.name] = model;
 }
-
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Database connection successful!');
-  })
-  .catch(err => {
-    console.error('Database connection failed:', err);
-  });
-
-fs
-  .readdirSync(__dirname)
-  .filter(file => {
-    return (
-      file.indexOf('.') !== 0 &&
-      file !== basename &&
-      file.slice(-3) === '.js' &&
-      file.indexOf('.test.js') === -1
-    );
-  })
-  .forEach(file => {
-    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
-    db[model.name] = model;
-  });
 
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
@@ -49,20 +48,4 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-// db.User = require('./user')(sequelize,Sequelize.DataTypes)
-// db.Event = require('./event')(sequelize,Sequelize.DataTypes)
-// db.Venue = require('./venue')(sequelize,Sequelize.DataTypes)
-// db.Ticket = require('./ticket')(sequelize,Sequelize.DataTypes)
-
-
-// db.User.hasMany(db.Ticket , {foreignKey:'userId'});
-// db.Ticket.belongsTo(db.User, {foreignKey:'userId'})
-
-// db.Event.hasMany(db.Ticket, {foreignKey:'eventId'});
-// db.Ticket.belongsTo(db.Event, {foreignKey:'eventId'})
-
-
-// db.Event.belongsTo(db.Venue, {foreignKey:'venueId'});
-// db.Venue.hasMany(db.Event ,{foreignKey:'venueId'})
-
-module.exports = db;
+export default db;
