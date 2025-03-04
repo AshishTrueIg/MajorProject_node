@@ -26,15 +26,16 @@ app.get('/',(req,res)=>{
     res.send("Hello from backend");
 })
 
-
 sequelize.authenticate()
   .then(() => {
     console.log('Database connected successfully');
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-    });
-  })
+})
   .catch((err) => {
     console.error(`Database connection failed: ${err.message}`);
     process.exit(1);
-  });
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+

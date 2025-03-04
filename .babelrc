@@ -1,4 +1,7 @@
+
 {
-  "presets": ["@babel/preset-env"],
-  "ignore": ["node_modules", "dist"]
+  "presets": [["@babel/preset-env",
+  {
+    "target": {"node":true}
+  }]]
 }
