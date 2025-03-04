@@ -112,7 +112,7 @@ const OneToMany = async (req,res)=>{
         const data = await User.findAll({
             include:[{
                 model:Ticket,
-                as:'Tickets',
+                as:'tickets',
                 foreignKey:'userId',
                 required:false
             }]

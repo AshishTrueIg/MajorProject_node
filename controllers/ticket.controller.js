@@ -71,7 +71,12 @@ const cancelTicket = async (req,res)=>{
 
 const onetomany = async (req,res)=>{
     try {
-        const data = await Ticket.findAll({include : [User,Event]});
+        const data = await Ticket.findAll({
+            include:[
+                {model: User , as: 'user'},
+                {model: Event , as: 'event'}
+            ]
+        });
         res.json(data)
     } catch (error) {
         res.status(500).json({error : error.message})

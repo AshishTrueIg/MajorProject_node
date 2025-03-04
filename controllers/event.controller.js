@@ -109,7 +109,10 @@ const bookTicket = async (req, res) => {
 const oneToMany = async (req,res)=>{
   try {
     const events = await Event.findAll({
-      include: [Venue,Ticket]
+      include:[
+        {model: Venue , as: 'venues'},
+        {model: Ticket , as: 'tickets'}
+      ]
     });
     res.json(events);
   } catch (error) {

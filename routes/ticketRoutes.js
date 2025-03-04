@@ -5,10 +5,11 @@ const router = express.Router();
 
 router.get('/',ticketController.getAllTickets);
 
+router.get('/oneToMany',ticketController.onetomany)
+
 router.get('/user/:id',ticketController.getUserTickets);
 
 router.delete('/:id',ticketController.cancelTicket);
 
-router.get('/oneToMany',ticketController.onetomany)
 
 export default router;
