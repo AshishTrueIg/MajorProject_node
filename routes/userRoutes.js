@@ -9,6 +9,8 @@ router.get('/',userController.getAllUsers);
 
 router.get('/oneToMany',userController.OneToMany);
 
+router.get('/rawQuery',userController.rawQueryUser);
+
 router.get('/:id',userController.getUserById);
 
 router.post('/', validate(createUserSchema) ,userController.createUser);

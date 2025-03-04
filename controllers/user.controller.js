@@ -2,7 +2,7 @@ import db from '../db/models/index.js'
 const User = db.User;
 const Ticket = db.Ticket;
 const sequelize = db.sequelize;
-
+import { QueryTypes, where } from 'sequelize';
 let currentPage = 1;
 const getAllUsers = async (req, res) => {
     try {
@@ -124,6 +124,18 @@ const OneToMany = async (req,res)=>{
     }
 }
 
+const rawQueryUser = async (req,res)=>{
+    try {
+        const users = await sequelize.query('SELECT * FROM "Users"', {
+            type: QueryTypes.SELECT,
+          });
+
+        res.status(200).json({data:users})
+    } catch (error) {
+        res.status(500).json({error : error.message});
+    }
+}
+
 
 export default {
     getAllUsers,
@@ -131,5 +143,6 @@ export default {
     createUser,
     updateUser,
     deleteUser,
-    OneToMany
+    OneToMany,
+    rawQueryUser
 }
