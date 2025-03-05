@@ -2,20 +2,30 @@ import db from '../db/models/index.js'
 const User = db.User;
 const Ticket = db.Ticket;
 const sequelize = db.sequelize;
-import { QueryTypes, where } from 'sequelize';
+import { json, QueryTypes, where } from 'sequelize';
 let currentPage = 1;
+import client from '../helpers/redis.helper.js'
+
 const getAllUsers = async (req, res) => {
     try {
-        
         const size = 3;
         const totalUsers = await User.count();
         const totalPages = Math.ceil(totalUsers / size);
         const offset = (currentPage - 1) * size;
 
+
+        const  cacheData = await client.get('usersData')
+
+        if(cacheData)
+            return res.status(200).json(JSON.parse(cacheData));
+
         const data = await User.findAll({
             limit: size,
             offset: offset
         });
+
+        await client.set("usersData",JSON.stringify(data))
+        await client.expire("usersData",100)
 
         currentPage = currentPage < totalPages ? currentPage + 1 : 1;
 

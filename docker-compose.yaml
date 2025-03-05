@@ -24,7 +24,7 @@ services:
       DB_USERNAME: postgres
       DB_PASSWORD: Ayush1ashish
       DB_NAME: EventManagement
-      DB_HOST: postgres # Use the service name instead of localhost
+      DB_HOST: postgres
       DB_DIALECT: postgres
     ports:
       - "8000:8000"

@@ -1,6 +1,6 @@
 import express from 'express';
 import venueController from '../controllers/venue.controller.js';
-import validate from '../utils/ajvValidator.js';
+import validate from '../helpers/ajvValidator.js';
 import createVenueSchema from '../validators/venueValidator.js'
 
 const router = express.Router();

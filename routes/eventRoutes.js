@@ -1,6 +1,6 @@
 import express from 'express';
 import eventController from '../controllers/event.controller.js'
-import validate from '../utils/ajvValidator.js'
+import validate from '../helpers/ajvValidator.js'
 import createEventSchema from '../validators/eventValidator.js';
 import createTicketSchema from '../validators/ticketValidator.js'
 

@@ -1,6 +1,6 @@
 import express from 'express';
 import userController from '../controllers/user.controller.js'
-import validate from '../utils/ajvValidator.js'
+import validate from '../helpers/ajvValidator.js'
 import createUserSchema from '../validators/userValidator.js';
 
 const router = express.Router();

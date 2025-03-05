@@ -6,7 +6,7 @@ import userRoutes from './routes/userRoutes.js'
 import ticketRoutes from './routes/ticketRoutes.js'
 import venueRoutes from './routes/venueRoutes.js'
 import eventRoutes from './routes/eventRoutes.js'
-import startEventExpiryCron from './utils/cronJobs.js'
+import startEventExpiryCron from './helpers/cronJobs.js'
 const sequelize =db.sequelize
 
 const app = express();
